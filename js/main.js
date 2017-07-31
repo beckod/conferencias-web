@@ -3,11 +3,38 @@ var api = 'AIzaSyCqRFq-nggwD1HLcq_r1fSlUJkzlVV0KZc';
 
 var map;
       function initMap() {
+
+        var latLng = {
+            lat: -33.4626751,
+            lng: -70.66412
+        }
+
         map = new google.maps.Map(document.getElementById('mapa'), {
-          center: {lat: -34.397, lng: 150.644},
-          zoom: 8
+          'center': latLng,
+          'zoom': 12,
+          //'draggable' : false,
+          //'scrollwheel': false
         });
-      }
+
+        var contenido = '<h2>Conferencias web</h2>'+
+                    '<p>Del 10 al 12 de diciembre</p>' + 
+                    '<p>Visítanos</p>'
+
+        var informacion = new google.maps.InfoWindow({
+        content: contenido
+      });
+
+        //Agregar pin a direccion
+        var marker = new google.maps.Marker({
+          position:latLng,
+          map: map,
+          title: 'Conferencias web'
+      });
+
+      marker.addListener('click', function(){
+        informacion.open(map, marker);
+      });
+    }
 
 //Para que codigo se ejecute una vez
 (function(){
